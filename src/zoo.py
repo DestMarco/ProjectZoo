@@ -9,8 +9,8 @@
 3. Fence: questa classe rappresenta un recinto dello zoo in cui sono tenuti gli animali. I recinti possono contenere uno o più animali.
  I recinti possono hanno gli attributi area, temperature e habitat.
 
-4. ZooKeeper: questa classe rappresenta un guardiano dello zoo responsabile della gestione dello zoo. I guardiani dello zoo hanno un nome, 
-un cognome, e un id. Essi possono nutrire gli animali, pulire i recinti e svolgere altri compiti nel nostro zoo virtuale.
+4. ZooKeeper: questa classe rappresenta un guardiano dello zoo responsabile della gestione dello zoo. I guardiani dello zoo hanno un name, 
+un surname, e un id. Essi possono nutrire gli animali, pulire i recinti e svolgere altri compiti nel nostro zoo virtuale.
 
 Funzionalità:
 
@@ -75,9 +75,9 @@ class Fence:
 
 class ZooKeeper:
     # Defines the values for the object of the ZooKeeper class
-    def __init__(self, nome: str, cognome: str, id: str):
-        self.nome = nome
-        self.cognome = cognome
+    def __init__(self, name: str, surname: str, id: str):
+        self.name = name
+        self.surname = surname
         self.id = id
 
     # Function that allows the zookeeper to add a new animal to the zoo
@@ -126,7 +126,7 @@ class Zoo:
     def describe_zoo(self):
         print("Guardians:")
         for keeper in self.zoo_keepers:
-            print(f"ZooKeeper(name={keeper.nome}, surname={keeper.cognome}, id={keeper.id})")
+            print(f"ZooKeeper(name={keeper.name}, surname={keeper.surname}, id={keeper.id})")
         
         print("\nFences:")
         for fence in self.fences:
@@ -137,7 +137,7 @@ class Zoo:
                     print(f"Animal(name={animal.name}, species={animal.species}, age={animal.age}, height={animal.height:.2f}, width={animal.width:.2f}, health={animal.health:.2f})")
                 print("#" * 30)
 
-# Define some animals
+"""# Define some animals
 animal1 = Animal(name="Lion", species="Panthera leo", age=5, height=1.2, width=2.5, preferred_habitat="Savannah")
 animal2 = Animal(name="Elephant", species="Loxodonta", age=10, height=3.3, width=6.0, preferred_habitat="Savannah")
 animal3 = Animal(name="Penguin", species="Aptenodytes forsteri", age=3, height=0.8, width=1.0, preferred_habitat="Cold")
@@ -147,7 +147,7 @@ fence1 = Fence(area=100.0, temperature=30.0, habitat="Savannah")
 fence2 = Fence(area=50.0, temperature=-5.0, habitat="Cold")
 
 # Define a zookeeper
-zookeeper = ZooKeeper(nome="John", cognome="Doe", id="ZK001")
+zookeeper = ZooKeeper(name="John", surname="Doe", id="ZK001")
 
 # Define a zoo
 zoo = Zoo(fences=[fence1, fence2], zoo_keepers=[zookeeper])
@@ -192,4 +192,4 @@ print(f"Area cleaned in fence 2: {clean_area2}")
 
 # Final state of the zoo
 print("\nFinal state of the zoo:")
-zoo.describe_zoo()
+zoo.describe_zoo()"""
