@@ -54,7 +54,6 @@ Fra un recinto e l'altro mettete 30 volte il carattere #.
 """
 
 class Animal:
-    # Defines the values for the object of the Animal class
     def __init__(self, name: str, species: str, age: int, height: float, width: float, preferred_habitat: str):
         self.name = name
         self.species = species
@@ -66,7 +65,6 @@ class Animal:
         self.fen = None
 
 class Fence:
-    # Defines the values for the object of the Fence class
     def __init__(self, area: float, temperature: float, habitat: str):
         self.animals = []
         self.area = area
@@ -74,13 +72,11 @@ class Fence:
         self.habitat = habitat
 
 class ZooKeeper:
-    # Defines the values for the object of the ZooKeeper class
     def __init__(self, name: str, surname: str, id: str):
         self.name = name
         self.surname = surname
         self.id = id
 
-    # Function that allows the zookeeper to add a new animal to the zoo
     def add_animal(self, animal: Animal, fence: Fence):
         req_area = animal.height * animal.width
         if animal.preferred_habitat == fence.habitat and fence.area >= req_area:
@@ -88,41 +84,33 @@ class ZooKeeper:
             animal.fen = fence
             fence.area -= req_area
 
-    # Function that allows the zookeeper to remove an animal from the zoo
     def remove_animal(self, animal: Animal, fence: Fence):
         if animal in fence.animals:
             fence.animals.remove(animal)
             fence.area += animal.height * animal.width
             animal.fen = None
 
-    # Function that allows the zookeeper to feed all the animals in the zoo
     def feed(self, animal: Animal):
-        # Check if there is enough space in the enclosure for the enlarged animal
-        if  animal.fen.area  >= (animal.height * animal.width * 1.02):
-            # Increase the animal's health by 1%
-
+        new_height = animal.height * 1.02
+        new_width = animal.width * 1.02
+        new_area = new_height * new_width
+        old_area = animal.height * animal.width
+        if animal.fen.area >= (new_area - old_area):
             animal.health *= 1.01
-            # Increase the dimensions of the animal by 2%
-            animal.height *= 1.02
-            animal.width *= 1.02
-            animal.fen.area -= (animal.height * animal.width)
-    # Function that allows the zookeeper to clean all the enclosures in the zoo
+            animal.height = new_height
+            animal.width = new_width
+            animal.fen.area -= (new_area - old_area)
+
     def clean(self, fence: Fence) -> float:
-        area_oc = 0
-        for animal in fence.animals:
-            area_oc += animal.height * animal.width
-        if fence.area == 0:
-            return area_oc
-        else:
-            return area_oc / fence.area
+        area_oc = sum(animal.height * animal.width for animal in fence.animals)
+        total_area = area_oc + fence.area
+        return area_oc / total_area if total_area > 0 else 0
         
 class Zoo:
-    # Defines the values for the object of the Zoo class
     def __init__(self, fences: list[Fence], zoo_keepers: list[ZooKeeper]) -> None:
         self.fences = fences
         self.zoo_keepers = zoo_keepers
 
-    # Function that describes the information about the zoo, animals, and zookeepers
     def describe_zoo(self):
         print("Guardians:")
         for keeper in self.zoo_keepers:
